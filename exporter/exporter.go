@@ -2,6 +2,7 @@ package exporter
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
@@ -60,6 +61,13 @@ func (e *Exporter) Attach() error {
 	for _, program := range e.config.Programs {
 		if _, ok := e.modules[program.Name]; ok {
 			return fmt.Errorf("multiple programs with name %q", program.Name)
+		}
+		if program.File != "" {
+			buf, err := ioutil.ReadFile(program.File)
+			if err != nil {
+				return fmt.Errorf("failed to open/load program file", program.File)
+			}
+			program.Code = string(buf)
 		}
 
 		module := bcc.NewModule(program.Code, program.Cflags)

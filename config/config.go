@@ -15,6 +15,7 @@ type Program struct {
 	RawTracepoints map[string]string `yaml:"raw_tracepoints"`
 	PerfEvents     []PerfEvent       `yaml:"perf_events"`
 	Code           string            `yaml:"code"`
+	File           string            `yaml:"file"`
 	Cflags         []string          `yaml:"cflags"`
 }
 

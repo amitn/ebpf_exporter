@@ -714,6 +714,8 @@ cflags:
     - -DMACRO_NAME=value ]
 # Actual eBPF program code to inject in the kernel
 code: [ code ]
+# Use file to load eBPF program from
+file: file_name.c
 ```
 
 #### `perf_event`
